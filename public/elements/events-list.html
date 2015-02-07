@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="events-service.html">
+<link rel="import" href="event-entry.html">
+
+<polymer-element name="post-list" attributes="show">
+    <template>
+        <style>
+        :host {
+            display: block;
+            width: 100%;
+        }
+        event-entry {
+            margin-bottom: 30px;
+        }
+        event-entry h2 {
+            margin-left: 15px;
+        }
+        event-entry a {
+            color: #fff;
+            text-decoration: none;
+        }
+        </style>
+
+        <events-service id="service" events="{{events}}"></events-service>
+
+        <div layout vertical center>
+            <template repeat="{{event in events}}">
+                <event-entry>
+
+                    <h1 style="background:{{event.color}}; width:80px; text-align: center;">      
+                    {{event.magnitud}}</h1>
+                    <h2>{{event.localizacion}}</h2>
+                    <h6>{{event.fecha + ' ' + event.hora | formatDate}}</h6>
+                    <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
+                    <span horizontal end-justified layout><paper-button><a href="{{event.report}}" target="_blank">View report</a></paper-button></span>
+                </event-entry>
+
+            </template>
+        </div>
+    </template>
+
+    <script>
+    Polymer('post-list',{
+        ready: function(){
+            console.log('list ready')
+        },
+        formatDate: function(date) {
+            var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
+            return eventTime.startOf('hour').fromNow();
+        }
+    });
+    </script>
+</polymer-element>

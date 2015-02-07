@@ -1,0 +1,23 @@
+{
+  "name": "gaea_client",
+  "version": "0.0.0",
+  "authors": [
+    "Felix Guerrero <felixcriv@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.4",
+    "core-elements": "Polymer/core-elements#~0.5.4",
+    "core-ajax": "Polymer/core-ajax#~0.5.4",
+    "paper-elements": "Polymer/paper-elements#~0.5.4",
+    "moment": "~2.9.0",
+    "platform": "Polymer/platform#~0.4.2"
+  }
+}
