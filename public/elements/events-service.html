@@ -2,28 +2,50 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 
 <polymer-element name="events-service" attributes="events">
-  <template>
-    <style>
-    :host {
-      display: none;
-    }
-    </style>
-    <core-ajax id="ajax"
-      auto
-      url="https://gaea.herokuapp.com/events"
-      on-core-response="{{eventsLoaded}}"
-      handleAs="json">
-    </core-ajax>
-  </template>
-  <script>
-  Polymer('events-service', {
-    created: function() {
-      this.events = [];
-    },
-    eventsLoaded: function(data) {
-      // Make a copy of the loaded data
-      this.events = data.detail.response.events.slice(0);
-    }
-  });
-  </script>
+    <template>
+        <style>
+        :host {
+            display: none;
+        }
+        </style>
+        <core-ajax id="ajax" auto url="https://gaea.herokuapp.com/events" handleAs="json" on-core-response="{{handleResponse}}">
+        </core-ajax>
+    </template>
+    <script>
+    //adding some ideas from http://www.tutorialsavvy.com/2014/07/understanding-polymer-core-ajax-element.html
+    Polymer('events-service', {
+
+        created: function() {
+            this.events = [];
+        },
+
+        // ready: function() {
+        //     var ajax = this.$.ajax;
+        //     ajax.addEventListener('core-response', this.ajaxCallBackHandler);
+        //     ajax.addEventListener('core-error', this.ajaxErrorCallbBackHandler);
+        // },
+
+        // ajaxCallBackHandler: function(data) {
+        //     // Make a copy of the loaded data
+        //     this.events = data.detail.response.events.slice(0);
+        //     console.log(this.events);
+        // },
+
+        // ajaxErrorCallbBackHandler: function(error){
+        //   console.error(error);
+        // },
+
+        handleResponse: function(data) {
+            //console.log(data);
+            var e = data.detail.response.events.slice(0);
+            if (e.length) {
+                this.events = e;
+            } else {
+                alert('An error has ocurred, please try again later');
+            }
+
+
+        },
+    });
+    </script>
 </polymer-element>
