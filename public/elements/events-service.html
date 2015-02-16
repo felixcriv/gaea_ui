@@ -37,8 +37,8 @@
 
         handleResponse: function(data) {
             //console.log(data);
-            var e = data.detail.response.events.slice(0);
-            if (e.length) {
+            var e = data.detail.response.events;
+            if (e.slice(0).lenght) {
                 this.events = e;
             } else {
                 alert('There is not registered events for the past 24 hours');
