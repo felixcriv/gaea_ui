@@ -6,7 +6,7 @@
     "routes": {
         "/*": "/public/index.html"
     },
-    "exclude":["/public/build.html"]
+    "exclude":["/public/build.html"],
     "redirects": {
     "/": "/public/"
   }
