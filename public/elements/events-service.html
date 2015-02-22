@@ -36,9 +36,11 @@
         // },
 
         handleResponse: function(data) {
-            //console.log(data);
+            
             var e = data.detail.response.events;
-            if (e.slice(0).lenght) {
+            
+            if (Object.keys(e).length) {
+                
                 this.events = e;
             } else {
                 alert('There is not registered events for the past 24 hours');
