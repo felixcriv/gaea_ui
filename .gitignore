@@ -1,4 +1,4 @@
 /public/bower_components
 .*
-/.divshot-cache
+.divshot-cache
 !/.gitignore
