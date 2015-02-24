@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<!-- <link rel="import" href="../bower_components/paper-elements/paper-elements.html"> -->
 <link rel="import" href="events-service.html">
 <link rel="import" href="event-entry.html">
 
@@ -41,10 +40,7 @@
     </template>
 
     <script>
-    Polymer('post-list',{
-        ready: function(){
-            
-        },
+    Polymer('post-list', {
         formatDate: function(date) {
             var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
             return eventTime.startOf('hour').fromNow();

@@ -36,6 +36,11 @@
         color: white;
     }
     </style>
+    <style shim-shadowdom>
+    paper-spinner.orange::shadow .circle {
+        border-color: orange;
+    }
+    </style>
 
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
@@ -43,6 +48,7 @@
     <link rel="import" href="bower_components/font-roboto/roboto.html">
     <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
     <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
 
     <link rel="import" href="elements/events-list.html">
 
@@ -54,10 +60,10 @@
             <div>Latest Venezuela Earthquakes (Past 24 hours)</div>
         </core-toolbar>
         <div class="container" layout vertical center>
+            <paper-spinner class="orange" active></paper-spinner>
             <post-list show="all"></post-list>
         </div>
         <!-- main page content will go here -->
     </core-header-panel>
 </body>
-
 </html>

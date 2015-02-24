@@ -19,34 +19,18 @@
             this.events = [];
         },
 
-        // ready: function() {
-        //     var ajax = this.$.ajax;
-        //     ajax.addEventListener('core-response', this.ajaxCallBackHandler);
-        //     ajax.addEventListener('core-error', this.ajaxErrorCallbBackHandler);
-        // },
-
-        // ajaxCallBackHandler: function(data) {
-        //     // Make a copy of the loaded data
-        //     this.events = data.detail.response.events.slice(0);
-        //     console.log(this.events);
-        // },
-
-        // ajaxErrorCallbBackHandler: function(error){
-        //   console.error(error);
-        // },
-
         handleResponse: function(data) {
             
             var e = data.detail.response.events;
             
-            if (Object.keys(e).length) {
-                
+            if (Object.keys(e).length) {         
                 this.events = e;
+                var spinner = document.querySelector('paper-spinner');
+                spinner.active = false;
             } else {
+                spinner.active = false;
                 alert('There is not registered events for the past 24 hours');
             }
-
-
         },
     });
     </script>
