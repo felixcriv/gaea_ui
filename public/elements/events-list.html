@@ -27,8 +27,9 @@
             <template repeat="{{event in events}}">
                 <event-entry>
 
-                    <h1 style="background:{{event.color}}; width:80px; text-align: center;">      
-                    {{event.magnitud}}</h1>
+                    <h1 style="background:{{event.color}}; width:94px; text-align: center;">      
+                        {{event.magnitud}}
+                    </h1>
                     <h2>{{event.localizacion}}</h2>
                     <h6>{{event.fecha + ' ' + event.hora | formatDate}}</h6>
                     <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
