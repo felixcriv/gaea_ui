@@ -17,10 +17,11 @@
 
         created: function() {
             this.events = [];
+
         },
 
         handleResponse: function(data) {
-            
+            console.log('core-ajax with response');
             var e = data.detail.response.events;
             
             if (Object.keys(e).length) {         
