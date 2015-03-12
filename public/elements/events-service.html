@@ -23,10 +23,9 @@
         handleResponse: function(data) {
             console.log('core-ajax with response');
             var e = data.detail.response.events;
-            
+            var spinner = document.querySelector('paper-spinner');
             if (Object.keys(e).length) {         
                 this.events = e;
-                var spinner = document.querySelector('paper-spinner');
                 spinner.active = false;
             } else {
                 spinner.active = false;
