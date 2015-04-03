@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
-
+<link rel="import" href="../bower_components/ajax-promise/ajax-promise.html">
 <polymer-element name="events-service" attributes="events">
     <template>
         <style>
@@ -8,30 +8,49 @@
             display: none;
         }
         </style>
-        <core-ajax id="ajax" auto url="https://gaea.herokuapp.com/events" handleAs="json" on-core-response="{{handleResponse}}">
-        </core-ajax>
+        <ajax-promise id="ajax" method="GET" url="https://gaea.herokuapp.com/events" handleAs="json"></ajax-promise>
     </template>
     <script>
-  
-    Polymer('events-service', {
+    (function() {
+        Polymer('events-service', {
 
-        created: function() {
-            this.events = [];
+            created: function() {
+                this.events = [];
 
-        },
+            },
 
-        handleResponse: function(data) {
-            console.log('core-ajax with response');
-            var e = data.detail.response.events;
-            var spinner = document.querySelector('paper-spinner');
-            if (Object.keys(e).length) {         
-                this.events = e;
-                spinner.active = false;
-            } else {
-                spinner.active = false;
-                alert('There is not registered events for the past 24 hours');
-            }
-        },
-    });
+            domReady: function() {
+                console.log('ready');
+                var ajax = document.querySelector('ajax');
+                console.log(ajax);
+
+                ajax.request().then(function(response) {
+
+                    document.querySelector('template').model = {
+                        data: response.response
+                    };
+                    console.log(response);
+
+                }, function(error) {
+
+                    console.error(error);
+
+                });
+            },
+
+            handleResponse: function(data) {
+                console.log('core-ajax with response');
+                var e = data.detail.response.events;
+                var spinner = document.querySelector('paper-spinner');
+                if (Object.keys(e).length) {
+                    this.events = e;
+                    spinner.active = false;
+                } else {
+                    spinner.active = false;
+                    alert('There is not registered events for the past 24 hours');
+                }
+            },
+        });
+    })();
     </script>
 </polymer-element>

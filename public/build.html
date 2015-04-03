@@ -1,12 +1,10 @@
 <!--felixcriv@gmail.com -->
 <!-- Hello from Atlanta -->
 <!-- A polymerjs, nodejs API experiment -->
-
 <!doctype html>
 <html>
 
 <head>
-
     <title>gaea</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <style>
@@ -17,20 +15,24 @@
         background-color: #d4d7d8;
         font-family: 'RobotoDraft', sans-serif;
     }
+    
     .container {
         width: 80%;
         margin: 50px auto;
     }
+    
     @media (min-width: 481px) {
         .container {
             width: 400px;
         }
     }
+    
     core-header-panel {
         height: 100%;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
+    
     core-toolbar {
         background: #FF5722;
         color: white;
@@ -41,17 +43,14 @@
         border-color: orange;
     }
     </style>
-
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
-
     <link rel="import" href="bower_components/font-roboto/roboto.html">
     <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
     <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
     <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
-
-    <link rel="import" href="elements/events-list.html">
-
+    <link rel="import" href="bower_components/ajax-promise/ajax-promise.html">
+    <!-- <link rel="import" href="elements/events-list.html"> -->
 </head>
 
 <body unresolved>
@@ -60,10 +59,47 @@
             <div>Latest Venezuela Earthquakes (Past 24 hours)</div>
         </core-toolbar>
         <div class="container" layout vertical center>
+            <ajax-promise id="ajax" method="GET" url="https://gaea.herokuapp.com/events" handleAs="json"></ajax-promise>
             <paper-spinner class="orange" active></paper-spinner>
-            <post-list show="all"></post-list>
+            <template repeat="{{response.events}}">
+                <event-entry>
+
+                    <h1 style="background:{{event.color}}; width:94px; text-align: center;">      
+                        {{event.magnitud}}
+                    </h1>
+                    <h2>{{event.localizacion}}</h2>
+                    <h6>{{event.fecha + ' ' + event.hora | formatDate}}</h6>
+                    <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
+                    <span horizontal end-justified layout><paper-button><a href="{{event.report}}" target="_blank">View report</a></paper-button></span>
+                </event-entry>
+
+            </template>
+            <!-- <post-list show="all"></post-list> -->
         </div>
         <!-- main page content will go here -->
     </core-header-panel>
+    <script>
+    (function() {
+        var spinner = document.querySelector('paper-spinner');
+
+        document.addEventListener('polymer-ready', function() {
+            var ajax = document.querySelector('ajax-promise');
+
+            ajax.request().then(function(response) {
+                spinner.active = false;
+                document.querySelector('template').model = {
+                    response: response.response
+                };
+                console.log(response.response);
+
+            }, function(error) {
+                spinner.active = false;
+                console.error(error);
+
+            });
+        });
+    })();
+    </script>
 </body>
+
 </html>
