@@ -63,16 +63,14 @@
             <paper-spinner class="orange" active></paper-spinner>
             <template repeat="{{response.events}}">
                 <event-entry>
-
                     <h1 style="background:{{event.color}}; width:94px; text-align: center;">      
                         {{event.magnitud}}
                     </h1>
                     <h2>{{event.localizacion}}</h2>
-                    <h6>{{event.fecha + ' ' + event.hora | formatDate}}</h6>
+                    <h6>{{event.fecha + ' ' + event.hora}}</h6>
                     <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
                     <span horizontal end-justified layout><paper-button><a href="{{event.report}}" target="_blank">View report</a></paper-button></span>
                 </event-entry>
-
             </template>
             <!-- <post-list show="all"></post-list> -->
         </div>
@@ -80,6 +78,7 @@
     </core-header-panel>
     <script>
     (function() {
+
         var spinner = document.querySelector('paper-spinner');
 
         document.addEventListener('polymer-ready', function() {
@@ -99,10 +98,11 @@
             });
         });
 
-        // formatDate: function(date) {
-        //     var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
-        //     return eventTime.startOf('hour').fromNow();
-        // }
+        function formatDate(date) {
+            var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
+            return eventTime.startOf('hour').fromNow();
+        }
+
     })();
     </script>
 </body>
