@@ -1,6 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
-
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <polymer-element name="event-entry">
     <template>
         <style>
@@ -8,37 +10,42 @@
             display: block;
             position: relative;
             background-color: #2C3A40;
-            padding: 20px;
+            padding: 14px;
             width: 100%;
             font-size: 1.2rem;
             font-weight: 300;
-            color:#fff;
+            color: #fff;
         }
+        
         .card-header {
             margin-bottom: 10px;
         }
+        
         polyfill-next-selector {
             content: '.card-header h2';
         }
+        
         .card-header::content h1 {
             font-size: 1rem;
-            padding:4px;
+            padding: 4px;
         }
+        
         .card-header::content h2 {
             margin: 0;
             font-size: 1.2rem;
             font-weight: 300;
         }
+        
         polyfill-next-selector {
             content: '.card-header img';
         }
+        
         .card-header::content img {
             width: 70px;
             border-radius: 50%;
             margin: 10px;
         }
         </style>
-
         <div class="card-header" layout horizontal center>
             <content select="h1"></content>
             <content select="h2"></content>

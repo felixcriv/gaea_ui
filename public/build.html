@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>gaea</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <style>
@@ -37,6 +38,10 @@
         background: #FF5722;
         color: white;
     }
+    a{
+        text-decoration: none;
+        color:white;
+    }
     </style>
     <style shim-shadowdom>
     paper-spinner.orange::shadow .circle {
@@ -54,23 +59,30 @@
 </head>
 
 <body unresolved>
+    <ajax-promise id="ajax" method="GET" url="https://gaea.herokuapp.com/events" handleAs="json"></ajax-promise>
     <core-header-panel>
         <core-toolbar>
             <div>Latest Venezuela Earthquakes (Past 24 hours)</div>
         </core-toolbar>
         <div class="container" layout vertical center>
-            <ajax-promise id="ajax" method="GET" url="https://gaea.herokuapp.com/events" handleAs="json"></ajax-promise>
             <paper-spinner class="orange" active></paper-spinner>
-            <template repeat="{{response.events}}">
-                <event-entry>
-                    <h1 style="background:{{event.color}}; width:94px; text-align: center;">      
+            <template id="events" bind>
+                <template repeat="{{event in response}}">
+                    <event-entry>
+                        <h1 style="background:{{event.color}}; width:94px; text-align: center;">      
                         {{event.magnitud}}
-                    </h1>
-                    <h2>{{event.localizacion}}</h2>
-                    <h6>{{event.fecha + ' ' + event.hora}}</h6>
-                    <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
-                    <span horizontal end-justified layout><paper-button><a href="{{event.report}}" target="_blank">View report</a></paper-button></span>
-                </event-entry>
+                        </h1>
+                        <h2>{{event.localizacion}}</h2>
+                        <h6>{{event.ocurrido}}</h6>
+                        <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
+                        <span horizontal end-justified layout>
+                            <paper-button>
+                                <a href="{{event.report}}" target="_blank">View report</a>
+                            </paper-button>
+                        </span>
+                    </event-entry>
+                    <br/>
+                </template>
             </template>
             <!-- <post-list show="all"></post-list> -->
         </div>
@@ -80,28 +92,50 @@
     (function() {
 
         var spinner = document.querySelector('paper-spinner');
+        var template = document.getElementById('events');
+        template.bindingDelegate = new PolymerExpressions;
 
-        document.addEventListener('polymer-ready', function() {
-            var ajax = document.querySelector('ajax-promise');
+        function fulfill(response) {
+            return response.response.events
+        }
 
-            ajax.request().then(function(response) {
-                spinner.active = false;
-                document.querySelector('template').model = {
-                    response: response.response
-                };
-                console.log(response.response);
-
-            }, function(error) {
-                spinner.active = false;
-                console.error(error);
-
+        function processDates(data){
+            var newData = [];
+            data.forEach(function(value){
+                value.ocurrido = formatDate(value.fecha + ' ' + value.date);
+                newData.push(value);
             });
-        });
+
+            return newData;
+        }
+
+        function bindTemplate(data){
+            template.model = {response: data};
+        }
+
+        function rejected(error) {
+            console.error(error);
+        }
+
+        function completed(data) {
+            spinner.active = false;
+        }
 
         function formatDate(date) {
             var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
             return eventTime.startOf('hour').fromNow();
         }
+
+        function polymerReady() {
+            var ajax = document.querySelector('ajax-promise');
+            ajax.request()
+                .then(fulfill, rejected)
+                .then(processDates)
+                .then(bindTemplate)
+                .then(completed);
+        }
+
+        document.addEventListener('polymer-ready', polymerReady);
 
     })();
     </script>
