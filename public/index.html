@@ -42,8 +42,8 @@
         border-color: orange;
     }
     </style>
-    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js" defer=""></script>
+    <script src="bower_components/moment/min/moment.min.js" defer=""></script>
     <link href="//fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
 
     <style shim-shadowdom="">
@@ -325,7 +325,7 @@ html /deep/ [segment], html /deep/ segment {
 
 </style>
 
-<script src="bower_components/polymer/polymer.js"></script>
+<script src="bower_components/polymer/polymer.min.js"></script>
 
 
 
@@ -3840,57 +3840,6 @@ core-icon {
         </div>
         <!-- main page content will go here -->
     </core-header-panel>
-    <script>
-    (function() {
-
-        var spinner = document.querySelector('paper-spinner');
-        var template = document.getElementById('events');
-        template.bindingDelegate = new PolymerExpressions;
-
-        function fulfill(response) {
-            return response.response.events
-        }
-
-        function processDates(data){
-            var newData = [];
-            data.forEach(function(value){
-                value.ocurrido = formatDate(value.fecha + ' ' + value.date);
-                newData.push(value);
-            });
-
-            return newData;
-        }
-
-        function bindTemplate(data){
-            template.model = {response: data};
-        }
-
-        function rejected(error) {
-            console.error(error);
-        }
-
-        function completed(data) {
-            spinner.active = false;
-        }
-
-        function formatDate(date) {
-            var eventTime = moment(date, 'DD-MM-YYYY HH:mm').utcOffset(-30);
-            return eventTime.startOf('hour').fromNow();
-        }
-
-        function polymerReady() {
-            var ajax = document.querySelector('ajax-promise');
-            ajax.request()
-                .then(fulfill, rejected)
-                .then(processDates)
-                .then(bindTemplate)
-                .then(completed);
-        }
-
-        document.addEventListener('polymer-ready', polymerReady);
-
-    })();
-    </script>
-
+    <script src="app.min.js"></script>
 
 </body></html>
