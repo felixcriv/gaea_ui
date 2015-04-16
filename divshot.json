@@ -6,8 +6,13 @@
     "routes": {
         "/*": "/public/index.html"
     },
-    "exclude":["/public/build.html", "/public/elements/"],  
+    "exclude": ["/public/build.html", "/public/elements/"],
     "redirects": {
-    "/": "/public/"
-  }
+        "/": "/public/"
+    },
+    "cache_control": {
+        "/public/bower_components/**": 31536000,
+        "/public/js/**": 86400,
+        "/": false
+    }
 }
