@@ -11,7 +11,6 @@
      function processDates(data) {
          var newData = [];
          data.forEach(function(value) {
-            console.log(value);
              value.ocurrido = formatDate(value.fecha + ' ' + value.hora);
              newData.push(value);
          });
@@ -34,7 +33,7 @@
      }
 
      function formatDate(date) {
-         var eventTime = moment(date, 'DD-MM-YYYY HH:mm').add(30, 'minutes');
+         var eventTime = moment(date, 'MM-DD-YYYY hh:mm A').add(30, 'minutes');
          return eventTime.startOf('hour').fromNow();
      }
 
