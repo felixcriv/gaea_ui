@@ -32,9 +32,10 @@
         background: #FF5722;
         color: white;
     }
-    a{
+    
+    a {
         text-decoration: none;
-        color:white;
+        color: white;
     }
     </style>
     <style shim-shadowdom="">
@@ -325,7 +326,7 @@ html /deep/ [segment], html /deep/ segment {
 
 </style>
 
-<script src="bower_components/polymer/polymer.js"></script>
+<script src="bower_components/polymer/polymer.min.js"></script>
 
 
 
@@ -3765,7 +3766,7 @@ core-icon {
             background-color: #2C3A40;
             padding: 14px;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-weight: 300;
             color: #fff;
         }
@@ -3779,24 +3780,13 @@ core-icon {
         }
         
         .card-header::content h1 {
-            font-size: 1rem;
-            padding: 3px;
+            font-size: 0.8rem;
+            padding: 2px;
         }
         
         .card-header::content h2 {
-            margin: 0;
             font-size: 1.2rem;
             font-weight: 300;
-        }
-        
-        polyfill-next-selector {
-            content: '.card-header img';
-        }
-        
-        .card-header::content img {
-            width: 70px;
-            border-radius: 50%;
-            margin: 10px;
         }
         </style>
         <div class="card-header" layout="" horizontal="" center="">
@@ -3821,11 +3811,12 @@ core-icon {
             <template id="events" bind="">
                 <template repeat="{{event in response}}">
                     <event-entry>
-                        <h1 style="background:{{event.color}}; width:90px; text-align: center;">      
+                        <h1 style="background:{{event.color}}; width:108px; text-align: center;margin-right:20px;">      
                         {{event.magnitud}}
                         </h1>
-                        <h2>{{event.localizacion}}</h2>
-                        <h6>{{event.ocurrido}}</h6>
+                        <h2 style="  width: 333px;margin-left: 0px;">{{event.localizacion}}</h2>
+                        <h6 style="display:block;  margin-left: -110px;margin-top: -35px;">{{event.ocurrido}}</h6>
+                        <br>
                         <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -4:30</p>
                         <span horizontal="" end-justified="" layout="">
                             <paper-button>
@@ -3841,5 +3832,6 @@ core-icon {
         <!-- main page content will go here -->
     </core-header-panel>
     <script src="js/app.js"></script>
+
 
 </body></html>
