@@ -33,7 +33,7 @@
      }
 
      function formatDate(date) {
-         var eventTime = moment(date, 'MM-DD-YYYY hh:mm A').add(30, 'minutes');
+         var eventTime = moment(date, 'MM-DD-YYYY hh:mm A');
          return eventTime.startOf('hour').fromNow();
      }
 
