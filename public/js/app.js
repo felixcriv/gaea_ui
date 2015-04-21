@@ -5,7 +5,7 @@
      template.bindingDelegate = new PolymerExpressions;
 
      function fulfill(response) {
-         return response.response.events
+         return response.response
      }
 
      function processDates(data) {
