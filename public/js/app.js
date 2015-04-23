@@ -44,6 +44,14 @@
              .then(processDates)
              .then(bindTemplate)
              .then(completed);
+
+
+         $('body').on('click', 'paper-button', function(el) {
+
+             var element = $(this).parent().next('div');
+             element.backgroundDraggable();
+             element.slideToggle('slow');
+         });
      }
 
      document.addEventListener('polymer-ready', polymerReady);

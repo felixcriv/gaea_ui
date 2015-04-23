@@ -12,7 +12,7 @@
     }
     
     .container {
-        width: 80%;
+        width: 90%;
         margin: 50px auto;
     }
     
@@ -3765,7 +3765,7 @@ core-icon {
             position: relative;
             background-color: #2C3A40;
             padding: 14px;
-            width: 100%;
+            width: 116%;
             font-size: 0.9rem;
             font-weight: 300;
             color: #fff;
@@ -3792,10 +3792,14 @@ core-icon {
         <div class="card-header" layout="" horizontal="" center="">
             <content select="h1"></content>
             <content select="h2"></content>
-            <content select="h6"></content>
+            <content select="h4"></content>
         </div>
-        <content></content>
-        <content select="span"></content>
+        <span class="report-details">
+            <content select="p"></content>
+            <content select="span"></content>
+            <p></p>
+            <content select="div"></content>
+        </span>
     </template>
     <script>
     Polymer('event-entry',{});
@@ -3814,15 +3818,16 @@ core-icon {
                         <h1 style="background:{{event.color}}; width:108px; text-align: center;margin-right:20px;">      
                         {{event.magnitude}}
                         </h1>
-                        <h2 style="  width: 333px;margin-left: 0px;">{{event.place}}</h2>
-                        <h6 style="display:block;  margin-left: -110px;margin-top: -35px;">{{event.ago}}</h6>
-                        <br>
+                        <h2 style="width: 333px;margin-left: 0px;">{{event.place}}</h2>
+                        <h4 style="display:block;  margin-left: 20px;margin-top: -35px;">{{event.ago}}</h4>
                         <p><b>{{event.date}}</b> @{{event.hour}} GMT -04:30</p>
-                        <span horizontal="" end-justified="" layout="">
+                        <span style="margin-left: 330px;">
                             <paper-button>
-                                <a href="{{event.report}}" target="_blank">View report</a>
+                                <a data-url="{{event.report}}" target="#">View report</a>
                             </paper-button>
                         </span>
+                        <div id="report" class="panning" style="display:none;background:url({{event.report}}) no-repeat; background-size: 190%; height:150px;background-position: -230px -565px;">
+                        </div>
                     </event-entry>
                     <br>
                 </template>
@@ -3831,6 +3836,8 @@ core-icon {
         </div>
         <!-- main page content will go here -->
     </core-header-panel>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="js/draggable_background.min.js"></script>
     <script src="js/app.js"></script>
 
 
