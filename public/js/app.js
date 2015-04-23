@@ -11,7 +11,7 @@
      function processDates(data) {
          var newData = [];
          data.forEach(function(value) {
-             value.ocurrido = formatDate(value.fecha + ' ' + value.hora);
+             value.ago = formatDate(value.date + ' ' + value.hour);
              newData.push(value);
          });
 

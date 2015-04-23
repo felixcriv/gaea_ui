@@ -3812,12 +3812,12 @@ core-icon {
                 <template repeat="{{event in response}}">
                     <event-entry>
                         <h1 style="background:{{event.color}}; width:108px; text-align: center;margin-right:20px;">      
-                        {{event.magnitud}}
+                        {{event.magnitude}}
                         </h1>
-                        <h2 style="  width: 333px;margin-left: 0px;">{{event.localizacion}}</h2>
-                        <h6 style="display:block;  margin-left: -110px;margin-top: -35px;">{{event.ocurrido}}</h6>
+                        <h2 style="  width: 333px;margin-left: 0px;">{{event.place}}</h2>
+                        <h6 style="display:block;  margin-left: -110px;margin-top: -35px;">{{event.ago}}</h6>
                         <br>
-                        <p><b>{{event.fecha}}</b> @{{event.hora}} GMT -04:30</p>
+                        <p><b>{{event.date}}</b> @{{event.hour}} GMT -04:30</p>
                         <span horizontal="" end-justified="" layout="">
                             <paper-button>
                                 <a href="{{event.report}}" target="_blank">View report</a>
