@@ -2,10 +2,10 @@
 
      var spinner = document.querySelector('paper-spinner');
      var template = document.getElementById('events');
-     template.bindingDelegate = new PolymerExpressions;
+     template.bindingDelegate = new PolymerExpressions();
 
      function fulfill(response) {
-         return response.response
+         return response.response;
      }
 
      function processDates(data) {
@@ -28,10 +28,10 @@
          console.error(error);
      }
 
-     function completed(data) {
+     function completed() {
          spinner.active = false;
 
-         $('body').on('click', 'paper-button', function(el) {
+         $('body').on('click', 'paper-button', function() {
 
              var element = $(this).parent().next('div');
              element.backgroundDraggable();
