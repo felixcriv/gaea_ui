@@ -54,6 +54,13 @@
 
      }
 
-     document.addEventListener('polymer-ready', polymerReady);
+     //all content is loaded
+     if ('addEventListener' in document) {
+         
+         document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('polymer-ready', polymerReady);
+            FastClick.attach(document.body);
+         }, false);
+     }
 
  })();
