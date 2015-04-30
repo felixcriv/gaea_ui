@@ -2,3 +2,5 @@
 .*
 /.divshot-cache
 !/.gitignore
+!/.bowerrc
+/.divshot.json
