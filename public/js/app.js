@@ -26,6 +26,7 @@
 
      function rejected(error) {
          console.error(error);
+         trackJs.track(error);
      }
 
      function completed() {
