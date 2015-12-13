@@ -1,0 +1,41 @@
+{
+  "firebase": "gaea",
+  "public": "./",
+  "ignore": [
+    "/public/build.html",
+    "/public/elements/"
+  ],
+  "rewrites": [
+    {
+      "source": "/*",
+      "destination": "/public/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/public/",
+      "type": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/public/bower_components/**",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/public/js/**",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
+  ]
+}
